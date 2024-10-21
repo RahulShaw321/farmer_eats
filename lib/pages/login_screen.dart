@@ -1,4 +1,7 @@
 import 'package:farmer_eats_android_app/reusable.dart';
+import 'package:farmer_eats_android_app/widgets/custom_button.dart';
+import 'package:farmer_eats_android_app/widgets/custom_password_field.dart';
+import 'package:farmer_eats_android_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,41 +55,52 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: deviceHeight * 0.1,
               ),
-              TextFormField(
-                controller: TextEditingController(),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email_outlined),
-                    prefixIconColor: Colors.black,
-                    label: Text(
-                      'Email',
-                      style: GoogleFonts.beVietnamPro(color: Colors.grey),
-                    ),
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(8))),
-              ),
+              CustomTextField(
+                  deviceHeight: deviceHeight,
+                  controller: TextEditingController(),
+                  label: 'Email address'),
               SizedBox(
                 height: deviceHeight * 0.02,
               ),
-              TextFormField(
-                controller: TextEditingController(),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock_outline_rounded),
-                    prefixIconColor: Colors.black,
-                    label: Text(
-                      'Password',
-                      style: GoogleFonts.beVietnamPro(color: Colors.grey),
-                    ),
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.only(top: deviceHeight * 0.01,right: deviceHeight * 0.01),
-                      child: Text(
-                        'Forgot?',
-                        style: GoogleFonts.beVietnamPro(color: kOrangeColor),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8))),
+              CustomPasswordField(
+                  deviceHeight: deviceHeight,
+                  controller: TextEditingController(),
+                  onForgotPassword: () {}),
+              SizedBox(
+                height: deviceHeight * 0.02,
               ),
+              CustomButton(
+                  deviceHeight: deviceHeight, onPressed: () {}, label: 'Login'),
+              const SizedBox(height: 24),
+              
+              const SizedBox(height: 16),
+             Column(crossAxisAlignment: CrossAxisAlignment.center,
+             children: [ Text(
+                'or login with',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: deviceHeight * 0.01,color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                 
+                  
+                Image.asset('assets/images/google.png'),
+                  IconButton(
+                    icon: Icon(Icons.apple, color: Colors.black,size: deviceHeight * 0.035,),
+                    onPressed: () {
+                      // Handle Google login
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.facebook, color: Colors.blue,size: deviceHeight * 0.035),
+                    onPressed: () {
+                      // Handle Facebook login
+                    },
+                  ),
+                ],
+              ),],)
             ],
           ),
         ),
