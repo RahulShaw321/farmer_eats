@@ -1,4 +1,5 @@
-import 'package:farmer_eats_android_app/pages/splash_screen.dart';
+import 'package:farmer_eats_android_app/pages/login_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {
-        "/" : (context)=> SplashScreen(),
-        
-      },
+      home: LoginScreen()
     );
   }
 }
