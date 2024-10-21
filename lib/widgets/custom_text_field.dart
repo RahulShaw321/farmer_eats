@@ -21,7 +21,6 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
-        obscureText: true, // Password field behavior
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: deviceHeight * 0.02),
           prefixIcon: icon,

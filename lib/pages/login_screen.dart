@@ -1,18 +1,48 @@
+import 'package:farmer_eats_android_app/models/uesr_auth.dart';
+import 'package:farmer_eats_android_app/provider/login_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:farmer_eats_android_app/reusable.dart';
 import 'package:farmer_eats_android_app/widgets/custom_button.dart';
 import 'package:farmer_eats_android_app/widgets/custom_icon_button.dart';
 import 'package:farmer_eats_android_app/widgets/custom_password_field.dart';
 import 'package:farmer_eats_android_app/widgets/custom_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final deviceHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.bottom;
+    final passwordController = TextEditingController();
+    final emailController = TextEditingController();
+     final loginState = ref.watch(loginProvider);
+
+    void handleLogin() {
+      final email = emailController.text.trim();
+      final password = passwordController.text;
+
+      if (email.isEmpty || password.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter email and password')),
+        );
+        return;
+      }
+
+      final userAuth = UserAuth(
+        email: email,
+        password: password,
+        role: 'farmer',
+        deviceToken: '0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx',
+        type: 'email/facebook/google/apple',
+        socialId: '0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx',
+      );
+
+      ref.read(loginProvider.notifier).login(userAuth);
+    }
 
     return Scaffold(
       body: SizedBox(
@@ -58,7 +88,7 @@ class LoginScreen extends StatelessWidget {
               ),
               CustomTextField(
                   deviceHeight: deviceHeight,
-                  controller: TextEditingController(),
+                  controller: emailController,
                   icon: Icon(Icons.email),
                   label: 'Email address'),
               SizedBox(
@@ -66,13 +96,15 @@ class LoginScreen extends StatelessWidget {
               ),
               CustomPasswordField(
                   deviceHeight: deviceHeight,
-                  controller: TextEditingController(),
+                  controller: passwordController,
                   onForgotPassword: () {}),
               SizedBox(
                 height: deviceHeight * 0.03,
               ),
               CustomButton(
-                  deviceHeight: deviceHeight, onPressed: () {}, label: 'Login'),
+                  deviceHeight: deviceHeight,
+                  onPressed: handleLogin,
+                  label: 'Login'),
               SizedBox(height: deviceHeight * 0.035),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: deviceHeight * 0.01, color: Colors.grey),
                   ),
-                   SizedBox(height: deviceHeight * 0.035),
+                  SizedBox(height: deviceHeight * 0.035),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -91,7 +123,8 @@ class LoginScreen extends StatelessWidget {
                         deviceHeight: deviceHeight,
                         icon: Image.network(
                           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/225px-Google_%22G%22_logo.svg.png',
-                          height: deviceHeight * 0.042, // Adjust icon size to fit button design
+                          height: deviceHeight *
+                              0.042, // Adjust icon size to fit button design
                         ),
                         onPressed: () {
                           // Handle Google login
@@ -118,6 +151,15 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  loginState.when(
+                data: (_) => const SizedBox.shrink(), // No error
+                loading: () => const CircularProgressIndicator(),
+                error: (error, _) => SnackBar(
+                  content: Text(
+                    error.toString(),
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),)
                 ],
               )
             ],
