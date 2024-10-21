@@ -1,5 +1,6 @@
 import 'package:farmer_eats_android_app/reusable.dart';
 import 'package:farmer_eats_android_app/widgets/custom_button.dart';
+import 'package:farmer_eats_android_app/widgets/custom_icon_button.dart';
 import 'package:farmer_eats_android_app/widgets/custom_password_field.dart';
 import 'package:farmer_eats_android_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,7 @@ class LoginScreen extends StatelessWidget {
               CustomTextField(
                   deviceHeight: deviceHeight,
                   controller: TextEditingController(),
+                  icon: Icon(Icons.email),
                   label: 'Email address'),
               SizedBox(
                 height: deviceHeight * 0.02,
@@ -67,40 +69,57 @@ class LoginScreen extends StatelessWidget {
                   controller: TextEditingController(),
                   onForgotPassword: () {}),
               SizedBox(
-                height: deviceHeight * 0.02,
+                height: deviceHeight * 0.03,
               ),
               CustomButton(
                   deviceHeight: deviceHeight, onPressed: () {}, label: 'Login'),
-              const SizedBox(height: 24),
-              
-              const SizedBox(height: 16),
-             Column(crossAxisAlignment: CrossAxisAlignment.center,
-             children: [ Text(
-                'or login with',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: deviceHeight * 0.01,color: Colors.grey),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              SizedBox(height: deviceHeight * 0.035),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 
-                  
-                Image.asset('assets/images/google.png'),
-                  IconButton(
-                    icon: Icon(Icons.apple, color: Colors.black,size: deviceHeight * 0.035,),
-                    onPressed: () {
-                      // Handle Google login
-                    },
+                  Text(
+                    'or login with',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: deviceHeight * 0.01, color: Colors.grey),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.facebook, color: Colors.blue,size: deviceHeight * 0.035),
-                    onPressed: () {
-                      // Handle Facebook login
-                    },
+                   SizedBox(height: deviceHeight * 0.035),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomIconButton(
+                        deviceHeight: deviceHeight,
+                        icon: Image.network(
+                          'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/225px-Google_%22G%22_logo.svg.png',
+                          height: deviceHeight * 0.042, // Adjust icon size to fit button design
+                        ),
+                        onPressed: () {
+                          // Handle Google login
+                        },
+                      ),
+                      CustomIconButton(
+                        deviceHeight: deviceHeight,
+                        icon: Icon(
+                          Icons.apple,
+                          color: Colors.black,
+                          size: deviceHeight * 0.042,
+                        ),
+                        onPressed: () {
+                          // Handle Google login
+                        },
+                      ),
+                      CustomIconButton(
+                        deviceHeight: deviceHeight,
+                        icon: Icon(Icons.facebook,
+                            color: Colors.blue, size: deviceHeight * 0.042),
+                        onPressed: () {
+                          // Handle Facebook login
+                        },
+                      ),
+                    ],
                   ),
                 ],
-              ),],)
+              )
             ],
           ),
         ),

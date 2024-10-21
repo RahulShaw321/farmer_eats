@@ -4,12 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextField extends StatelessWidget {
   final double deviceHeight;
   final String label;
+  final Widget icon;
   final TextEditingController controller;
   const CustomTextField(
       {super.key,
       required this.deviceHeight,
       required this.controller,
-       required this.label});
+       required this.label, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,7 @@ class CustomTextField extends StatelessWidget {
         obscureText: true, // Password field behavior
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: deviceHeight * 0.02),
-          prefixIcon: const Icon(
-            Icons.lock_outline_rounded,
-            color: Colors.black54,
-          ),
+          prefixIcon: icon,
           label: Text(
             label,
             style: GoogleFonts.beVietnamPro(color: Colors.grey),

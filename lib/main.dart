@@ -1,4 +1,7 @@
+import 'package:farmer_eats_android_app/pages/forgot_password_screen.dart';
 import 'package:farmer_eats_android_app/pages/login_screen.dart';
+import 'package:farmer_eats_android_app/pages/reset_password_screen.dart';
+import 'package:farmer_eats_android_app/pages/verify_otp_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen()
+      home: VerifyOtpScreen()
     );
   }
 }
