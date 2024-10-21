@@ -1,6 +1,6 @@
 import 'package:farmer_eats_android_app/reusable.dart';
 import 'package:farmer_eats_android_app/widgets/custom_button.dart';
-import 'package:farmer_eats_android_app/widgets/custom_password_field.dart';
+
 import 'package:farmer_eats_android_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

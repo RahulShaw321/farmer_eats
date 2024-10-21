@@ -1,9 +1,9 @@
 import 'package:farmer_eats_android_app/reusable.dart';
 import 'package:farmer_eats_android_app/widgets/custom_button.dart';
-import 'package:farmer_eats_android_app/widgets/custom_password_field.dart';
-import 'package:farmer_eats_android_app/widgets/custom_text_field.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pinput/pinput.dart';
 
 class VerifyOtpScreen extends StatelessWidget {
   const VerifyOtpScreen({super.key});
@@ -12,6 +12,18 @@ class VerifyOtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height -
         MediaQuery.of(context).padding.bottom;
+    final defaultPinTheme = PinTheme(
+      width: deviceHeight * 0.08,
+      height: deviceHeight * 0.09,
+
+     
+      textStyle: GoogleFonts.beVietnamPro(fontSize: 22, color: Colors.black),
+      decoration: BoxDecoration(
+        
+          color: kTextfieldColor,
+          borderRadius: BorderRadius.circular(deviceHeight * 0.015),
+          border: Border.all(color: Colors.transparent)),
+    );
 
     return Scaffold(
       body: SizedBox(
@@ -53,24 +65,32 @@ class VerifyOtpScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: deviceHeight * 0.1,
+                height: deviceHeight * 0.06,
               ),
-              CustomTextField(
-                  deviceHeight: deviceHeight,
-                  icon: Icon(Icons.phone_outlined),
+              Center(
+              
+                child: Pinput(
+                  length: 5,
+                  
+                  defaultPinTheme: defaultPinTheme,
                   controller: TextEditingController(),
-                  label: 'Phone Number'),
+                  focusedPinTheme: defaultPinTheme.copyWith(
+                      decoration: defaultPinTheme.decoration!
+                          .copyWith(border: Border.all(color: kOrangeColor))),
+                  onCompleted: (value) => debugPrint(value),
+                ),
+              ),
               SizedBox(
                 height: deviceHeight * 0.02,
               ),
-              
               SizedBox(
                 height: deviceHeight * 0.03,
               ),
               CustomButton(
-                  deviceHeight: deviceHeight, onPressed: () {}, label: 'Submit'),
+                  deviceHeight: deviceHeight,
+                  onPressed: () {},
+                  label: 'Submit'),
               SizedBox(height: deviceHeight * 0.035),
-              
             ],
           ),
         ),
